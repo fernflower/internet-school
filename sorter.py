@@ -24,15 +24,14 @@ class Sorter:
                 self.table[card.fromP] = card.toP
                 start[card.toP] = 0
             else:
-                print 'value of ' + card.fromP + ' is: ' + `self.table[card.fromP]`
                 raise RouteError('Multiple routes from ' + `self.table[card.fromP]`)
-        print self.table
         #find start
         for key in self.table.keys():
             if (start[key] is None):
                 self.start = key
                 break
 
+    #the algo will work if there are no cycles in routesTable (the phrase 'route chain' has been interpreted as a tree) 
     def sort(self, cardList):
         try:
             self._fillRouteTable(cardList)

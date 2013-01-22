@@ -21,7 +21,6 @@ class Reader:
                 self.currWord = self.nextWord
                 self.nextWord = self.i.next()
         except StopIteration:
-            print "NO MORE!"
             self.nextWord = None
             self.i = None
             return self.currWord
@@ -34,19 +33,16 @@ class Reader:
     
     #BLOCKS ::= BLOCK (BLOCK)
     def _blocks(self):
-        print "enter blocks"
         count = 1
         result = dict()
         result['block' + `count`] = self._block()
         while (self._viewNext() is not None):
             count+=1
             result['block' + `count`] = self._block()
-        print "exit blocks"
         return result
 
     #BLOCK ::= '{' BLOCK '}'
     def _block(self):
-        print "enter block"
         result = None
         if (self._getNext() != '{'):
             raise Exception('Block should start with a { !')
@@ -54,32 +50,25 @@ class Reader:
             result = self._card()
             if (self._getNext() != '}'):
                 raise Exception('Block should end with a } !')
-        print "exit block : " + repr(result)
         return result
 
     #CARD ::= DATA (DATA)
     def _card(self):
-        print "enter card"
         result = dict()
         (key, value) = self._data()
         result[key] = value
-        #result.append(self._data())
         while (self._viewNext() != '}'):
             (key, value) = self._data()
             result[key] = value
-            #result.append(self._data())
-        print "exit card: " + repr(result)
         return result
        
     #DATA ::= KEY ':' VALUE
     def _data(self):
-        print "enter data"
         key = self._getNext()
         if (self._getNext() != ':'):
             raise Exception('Colon expected!')
         else:
             result = (key, self._value())
-            print "exit data: " + repr(result)
             return result
            
     #VALUE ::= string | BLOCK

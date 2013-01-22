@@ -1,21 +1,23 @@
 {
-  from : kirzhach 
+  from : "Boston, USA "
 
-  to : moscow 
-  transport :
-  { 
-  type : bus
-  params : {
-    seat : N/a
-    route: 339
-   }
+  to : Moscow
+  transport : 
+  {
+    type : plane
+    params: 
+    { 
+      seat : "1E"
+      route : "49"
+      gate : C
+    }
   }
 }
 
 
 {
-  from : minsk 
-  to : london 
+  from : Minsk 
+  to : London 
   transport : 
   {
     type : plane 
@@ -29,7 +31,7 @@
 }
 
 {
-  from : london
+  from : London
 
   to : "Boston, USA "
   transport : 
@@ -43,3 +45,18 @@
     }
   }
 }
+
+{
+  from : Moscow 
+
+  to : Kirzhach 
+  transport :
+  { 
+  type : bus
+  params : {
+    seat : 14
+    route: 229
+   }
+  }
+}
+
