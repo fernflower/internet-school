@@ -22,17 +22,16 @@ def main():
         #start
         #read data
         r = readerN.Reader('test')
-        r.read()
+        blocks = r.readToDictionary()
+        print repr(blocks)
+        cards = []
 
-        bus1 = entities.Bus({'route' : 43, 'seat' : 14})
-        bus2 = entities.Bus({'route' : 41, 'seat' : 11})
-        cards = [entities.TravelCard('london', 'oxford', bus1), 
-                entities.TravelCard('minsk', 'london', bus1),
-                entities.TravelCard('oxford', 'somewhere', bus1)]
-        algo = sorter.Sorter()
-        sortedList = algo.sort(cards)
-        #for card in sortedList: 
-        #    print card.message()
+        for key in blocks.keys():
+            card = entities.TravelCard(blocks[key])
+            cards.append(card)
+            print card.message()
+            
+
         
 
                 

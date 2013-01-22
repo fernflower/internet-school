@@ -35,22 +35,20 @@ class Reader:
     #BLOCKS ::= BLOCK (BLOCK)
     def _blocks(self):
         print "enter blocks"
-        result = []
-        self._block()
-        
-        #nextWord = self._viewNext()
+        count = 1
+        result = dict()
+        result['block' + `count`] = self._block()
         while (self._viewNext() is not None):
-            result.append(self._block())
+            count+=1
+            result['block' + `count`] = self._block()
         print "exit blocks"
         return result
 
     #BLOCK ::= '{' BLOCK '}'
     def _block(self):
         print "enter block"
-        nextWord = self._getNext()
-        print "next word is : " + repr(nextWord)
-        result = []
-        if (nextWord != '{'):
+        result = None
+        if (self._getNext() != '{'):
             raise Exception('Block should start with a { !')
         else:
             result = self._card()
@@ -62,10 +60,14 @@ class Reader:
     #CARD ::= DATA (DATA)
     def _card(self):
         print "enter card"
-        result = []
-        result.append(self._data())
+        result = dict()
+        (key, value) = self._data()
+        result[key] = value
+        #result.append(self._data())
         while (self._viewNext() != '}'):
-            result.append(self._data())
+            (key, value) = self._data()
+            result[key] = value
+            #result.append(self._data())
         print "exit card: " + repr(result)
         return result
        
@@ -88,8 +90,9 @@ class Reader:
         else:
             return self._getNext()
 
-
-    def read(self):
-        print repr(self.words)
-        self._blocks()
-
+    def readToDictionary(self):
+        try:
+            result = self._blocks()
+            return result
+        except Exception as e: 
+            print "Exception occured : " + e
