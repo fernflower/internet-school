@@ -1,4 +1,39 @@
 import re
+'''
+Input format:
+    (Would have used JSON (and standard JSON parser) if hadn't had misinterpreted 'standard library usage' as 'only sys module usage')
+    
+    JSON-like input with several restrictions: 
+    - ('{' and '}') have to be on a separate line
+    - data : value pairs are separated by newlines, not commas
+    - no json-list support
+    
+    {
+        data1 : value
+        data2 : 
+               {
+                   data3 : value
+                  
+               }
+    }
+
+    Typical TransportCard description: 
+    {
+        from : London
+        to   : Boston
+        transport : 
+                {
+                    type : plane
+                    params: 
+                        { 
+                            seat : "14E"
+                            route : "112-K"
+                            gate : A
+                        }
+                }
+    }
+'''
+
 
 class Reader:
     def __init__(self, filename):
