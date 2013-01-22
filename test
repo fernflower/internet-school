@@ -1,0 +1,19 @@
+{
+   from     : kirzhach 
+  to : moscow 
+  transport : bus
+}
+
+{
+  from : minsk 
+  to : london 
+  transport : 
+  {
+    type : plane 
+    params : 
+    {
+      seat: 12  
+      route : 15 
+    }
+  }
+}
